@@ -1,0 +1,5 @@
+---
+- name: Playbok para instalar agente node_exporter.
+  hosts: all
+  roles:
+    - roles/
