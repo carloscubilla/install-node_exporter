@@ -17,6 +17,10 @@
     src: '/tmp/{{ node_exporter_version }}/node_exporter'
     dest: /usr/local/bin/
     remote_src: yes
+
+- name: Configurar permisos de ejecucion
+  file:
+    path: /usr/local/bin/
     owner: node_exporter
     group: node_exporter
     mode: u+x,g+x,o+x
@@ -28,21 +32,10 @@
     mode: u=rw,g=rw,o=r
 
 - name: Cargar conf de servicio node_exporter.
-  blockinfile:
-    path: /etc/systemd/system/node_exporter.service
-    state: present
-    block: |
-      [Unit]
-      Description=Prometheus Node Exporter
-      Wants=network-online.target
-      After=network-online.target
-      [Service] 
-      User=node_exporter
-      Group=node_exporter
-      Type=simple
-      ExecStart=/usr/local/bin/node_exporter
-      [Install]
-      WantedBy=multi-user.target
+  copy:
+    src: systemd/node_exporter.service
+    dest: /etc/systemd/system/node_exporter.service
+
 - name: Systemctl reload
   systemd: 
     daemon_reload: yes
