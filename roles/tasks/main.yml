@@ -14,7 +14,7 @@
 
 - name: Copiar binario node_exporter al /usr/local/bin
   copy: 
-    src: /tmp/node_exporter-1.3.1.linux-amd64/node_exporter
+    src: '/tmp/{{ node_exporter_version }}/node_exporter'
     dest: /usr/local/bin/
     remote_src: yes
     owner: node_exporter
