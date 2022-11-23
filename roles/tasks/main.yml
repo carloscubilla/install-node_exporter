@@ -32,7 +32,7 @@
     mode: u=rw,g=rw,o=r
 
 - name: Cargar conf de servicio node_exporter.
-  copy:
+  template:
     src: systemd/node_exporter.service
     dest: /etc/systemd/system/node_exporter.service
 
