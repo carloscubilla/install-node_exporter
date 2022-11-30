@@ -20,16 +20,16 @@
 
 - name: Configurar permisos de ejecucion
   file:
-    path: /usr/local/bin/
+    path: /usr/local/bin/node_exporter
     owner: node_exporter
     group: node_exporter
-    mode: u+x,g+x,o+x
+    mode: "0755"
 
 - name: Crear archivo de conf de servicio node_exporter
   file:
     path: /etc/systemd/system/node_exporter.service
     state: touch
-    mode: u=rw,g=rw,o=r
+    mode: "0755"
 
 - name: Cargar conf de servicio node_exporter.
   template:
